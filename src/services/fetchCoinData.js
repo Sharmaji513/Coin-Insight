@@ -3,6 +3,8 @@ import axiosInstance from "../Utils/axiosInstance";
 
 
 export async function fetchCoinData(page=1 , currency) {
+
+    
     
   const perPage = 20
 
