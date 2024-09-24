@@ -1,38 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "react-query";
 
 const CoinTable = () => {
-
-
-
-  const { data, isLoading, isError, error} = useQuery(['coins'], () => fetchCoinData('usd'), {
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, error } = useQuery(
+    ["coins", page],
+    () => fetchCoinData(page, "usd"),
+    {
       // retry: 2,
       // retryDelay: 1000,
       cacheTime: 1000 * 60 * 2,
       staleTime: 1000 * 60 * 2,
-  });
-
+    }
+  );
 
   console.log(data);
-  
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-
-
-  
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto ">
       <table className="table w-[80vw] mx-auto mt-10">
         {/* head */}
-        <thead className="h-[4vw] bg-yellow-500  text-black">
-          <tr className="text-[1.2vw]  ">
+        <thead className="h-[4rem]  bg-yellow-500  text-black">
+          <tr className="text-[1.2rem]  ">
             <th>Coin</th>
             <th>Price</th>
             <th>24h Change</th>
-            <th>Mrket Cap</th>
+            <th>Market Cap</th>
           </tr>
         </thead>
 
@@ -49,7 +46,9 @@ const CoinTable = () => {
                   </div>
                   <div>
                     <div className="font-bold">{coin.name}</div>
-                    <div className="text-sm opacity-50">{coin.symbol.toUpperCase()}</div>
+                    <div className="text-sm opacity-50">
+                      {coin.symbol.toUpperCase()}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -60,6 +59,13 @@ const CoinTable = () => {
           ))}
         </tbody>
       </table>
+
+      <div className="w-[30vw] flex justify-center items-center text-center mx-auto mt-10 mb-10">
+        <div className="join grid grid-cols-2">
+          <button   disabled={page === 1} onClick={()=>setPage(page -1) } className="join-item btn btn-outline">Previous</button>
+          <button onClick={()=>setPage(page +1) } className="join-item btn btn-outline">Next</button>
+        </div>
+      </div>
     </div>
   );
 };
