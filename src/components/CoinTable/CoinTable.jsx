@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "react-query";
-import currencyStore from '../../Store/store'
+import currencyStore from "../../Store/store"
+import { useNavigate } from "react-router-dom";
+
 
 const CoinTable = () => {
   const { currency } = currencyStore();
+  const navigate = useNavigate()
 
   const [page, setPage] = useState(1);
   const { data, isLoading,  error  } = useQuery( ["coins", page , currency], () => fetchCoinData(page, currency),
@@ -18,6 +21,10 @@ const CoinTable = () => {
 console.log(useQuery());
 
   console.log(data);
+
+  function handleCoinRedirect(id){
+    navigate(`/details/${id}`)
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
@@ -38,9 +45,10 @@ console.log(useQuery());
         <tbody>
           {/* Map through fetched coin data */}
           {data?.map((coin) => (
-            <tr key={coin.id}>
+           
+            <tr key={coin.id} onClick={()=>handleCoinRedirect(coin.id)} className="cursor-pointer ">
               <td>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 ">
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
                       <img src={coin.image} alt={coin.name} />
@@ -58,6 +66,7 @@ console.log(useQuery());
               <td>{coin.price_change_percentage_24h.toFixed(2)}%</td>
               <td>${coin.market_cap.toLocaleString()}</td>
             </tr>
+           
           ))}
         </tbody>
       </table>
