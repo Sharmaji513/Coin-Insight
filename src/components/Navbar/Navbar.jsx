@@ -1,5 +1,6 @@
 import React from 'react'
 import currencyStore from '../../Store/store'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -32,7 +33,7 @@ const { setCurrency} = currencyStore()
       </div>
     </div>
     <div className="navbar-center">
-      <a className="btn btn-ghost text-xl">Coin Insight</a>
+      <Link to={'/'} className="btn btn-ghost text-xl">Coin Insight</Link>
     </div>
     <div className="navbar-end">
       <button className="btn btn-ghost btn-circle">
