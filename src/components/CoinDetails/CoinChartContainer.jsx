@@ -3,41 +3,37 @@ import CoinChart from "./CoinChart";
 import { useQuery } from "react-query";
 import currencyStore from "../../Store/store";
 import { fetchCoinHistoricData } from "../../services/fetchCoinHistoricData";
+import Alert from "../Alert/Alert";
 
 const CoinChartContainer = ({ coinId }) => {
   const { currency } = currencyStore();
 
   const [days, setDays] = useState(7);
-  // const [interval, setCoinInterval] = useState('daily');
+  const [interval, setCoinInterval] = useState('daily');
 
-  const {
-    data: historicData,
-    isLoading,
-    isError,
-  } = useQuery(
-    () => fetchCoinHistoricData(coinId, currency, days),
-    ["coinHistoriData", coinId, currency, days], //dependency
-    {
-      cacheTime: 1000 * 60 * 2,
-      staleTime: 1000 * 60 * 2,
-    }
-  );
+
+  const { data: historicData, isLoading, isError } = useQuery(['coinHistoricData', coinId, currency, days , interval], () => fetchCoinHistoricData(coinId,currency , days , interval), {
+    cacheTime: 1000 * 60 * 2,
+    staleTime: 1000 * 60 * 2,
+});
+
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-//   if (isError) {
-//     return <p>Error</p>;
-//   }
+  if(isError) {
+    return <Alert message="Error fetching data" type="error" />
+}
 
-  console.log(coinId);
+  // console.log(coinId);
 
   return (
     <div>
       <CoinChart
         historicData={historicData}
         setDays={setDays}
+        setCoinInterval={setCoinInterval} 
         days={days}
         currency={currency}
       />

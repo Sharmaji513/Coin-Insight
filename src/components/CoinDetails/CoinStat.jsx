@@ -48,7 +48,7 @@ const CoinStat = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row ">
-        <div className="md:w-[40%] w-full flex flex-col items-center mt-6 md:mt-0 border-r-2 border-gray-500">
+        <div className="md:w-[40%] w-full flex flex-col items-center mt-6 md:mt-0 border-r-2 border-gray-500 h-full hover:border-r-4">
           <img className="h-52" src={data?.image?.large} alt="" />
           <h1 className="text-4xl font-bold mb-5">{data?.name}</h1>
 
