@@ -7,7 +7,6 @@ const CoinDetailsPage = () => {
   return (
     <div>
       <Navbar />
-
       <CoinStat />
     
     </div>
