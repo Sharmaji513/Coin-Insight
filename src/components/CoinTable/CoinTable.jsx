@@ -3,6 +3,7 @@ import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "react-query";
 import currencyStore from "../../Store/store"
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 
 const CoinTable = () => {
@@ -26,7 +27,7 @@ console.log(useQuery());
     navigate(`/details/${id}`)
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div>Error loading data</div>;
 
   return (

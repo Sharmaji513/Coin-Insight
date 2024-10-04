@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import currencyStore from "../../Store/store";
 import { fetchCoinHistoricData } from "../../services/fetchCoinHistoricData";
 import Alert from "../Alert/Alert";
+import Loader from "../Loader/Loader";
 
 const CoinChartContainer = ({ coinId }) => {
   const { currency } = currencyStore();
@@ -19,7 +20,7 @@ const CoinChartContainer = ({ coinId }) => {
 
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div><Loader/></div>;
   }
 
   if(isError) {

@@ -5,6 +5,7 @@ import currencyStore from "../../Store/store";
 import { fetchCoinDetails } from "../../services/fetchCoinDetails";
 import parse from "html-react-parser";
 import CoinChartContainer from "./CoinChartContainer";
+import Loader from "../Loader/Loader";
 
 const CoinStat = () => {
   const { coinId } = useParams();
@@ -38,7 +39,7 @@ const CoinStat = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   if (isError) {
