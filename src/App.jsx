@@ -1,19 +1,22 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import Loader from "./components/Loader/Loader";
 
-
-import CoinInfo from "./pages/CoinInfo";
-import { Route,  Routes } from "react-router-dom";
-import CoinDetails from "./pages/CoinDetails";
-import Home from "./pages/Home";
+// Lazy loading components
+const CoinInfo = lazy(() => import("./pages/CoinInfo"));
+const CoinDetails = lazy(() => import("./pages/CoinDetails"));
+const Home = lazy(() => import("./pages/Home"));
 
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/coin" element={<CoinInfo/>} />
-        <Route path="/details/:coinId" element={<CoinDetails/>} />
-      </Routes>
+      <Suspense fallback={<div><Loader/></div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/coin" element={<CoinInfo />} />
+          <Route path="/details/:coinId" element={<CoinDetails />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };
