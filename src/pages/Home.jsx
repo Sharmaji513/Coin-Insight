@@ -23,9 +23,7 @@ const Home = () => {
             Crypto Tracker Platform
           </h1>
           <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          A simple tool to track your favorite cryptocurrencies with live updates.Check out real-time prices and trends of digital currencies
           </p>
           <Link to={"/coin"}>
             <button className="btn btn-primary">Get Started</button>

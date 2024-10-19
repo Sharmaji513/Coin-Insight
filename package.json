@@ -19,6 +19,7 @@
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.2",
+    "use-debounce": "^10.0.3",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {

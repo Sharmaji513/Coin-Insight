@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import CoinStat from "../components/CoinDetails/CoinStat";
-import CoinChart from "../components/CoinDetails/CoinChart";
+
 
 const CoinDetailsPage = () => {
   return (
